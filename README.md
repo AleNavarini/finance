@@ -1,28 +1,12 @@
-# Finance project backend
+# Finance
 
-## Database
+This project will have 3 dirs
+- Front
+- Back
+- Protos
 
-Somethind
+Hopefully we are able to do a gRPC api between front and back to track investments.
 
-## Schema
+This was done for learning purposes. Probably REST was the way to go
 
-- Users
-  - id
-  - name
-  - email
-  - created_at
-  - updated_at
-- Orders
-  - id
-  - date
-  - ticker
-  - currency
-  - type
-  - price
-  - quantity
-  - user_id
-- CashMovement
-  - id
-  - type (deposit, withdraw)
-  - currency
-  - amount
+Help me god.
