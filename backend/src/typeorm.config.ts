@@ -7,7 +7,7 @@ export const typeOrmConfig: TypeOrmModuleAsyncOptions = {
   useFactory: (configService: ConfigService) => ({
     type: 'postgres',
     url: configService.get<string>('POSTGRES_URL_NON_POOLING'),
-    synchronize: false, // Set to false in production to prevent schema changes
+    synchronize: true, // Set to false in production to prevent schema changes
     autoLoadEntities: true, // Automatically load entities from feature modules
     ssl: {
       rejectUnauthorized: false, // Required for Supabase hosted databases
