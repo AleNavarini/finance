@@ -2,7 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './typeorm.config';
-import { UserModule } from './user/user.module';
+import { UsersModule } from './user/users.module';
+import { AssetsModule } from './assets/assets.module';
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { UserModule } from './user/user.module';
       envFilePath: '.env',
     }),
     TypeOrmModule.forRootAsync(typeOrmConfig),
-    UserModule,
+    UsersModule,
+    AssetsModule,
   ],
   controllers: [],
   providers: [],
