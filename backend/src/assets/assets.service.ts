@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAssetDto } from './dto/create-asset.dto';
 import { UpdateAssetDto } from './dto/update-asset.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Asset } from './entities/asset.entity';
+import yahooFinance from 'yahoo-finance2';
 
 @Injectable()
 export class AssetsService {
@@ -11,23 +12,47 @@ export class AssetsService {
     @InjectRepository(Asset) private assetRepository: Repository<Asset>,
   ) {}
 
-  create(createAssetDto: CreateAssetDto) {
-    return 'This action adds a new asset';
+  async create(createAssetDto: CreateAssetDto) {
+    // Validate ticker with Yahoo Finance
+    let found = false;
+    const quote = await yahooFinance.quote(createAssetDto.ticker);
+    console.log(quote);
+    if (!quote || !quote.symbol) {
+      found = false;
+    }
+
+    if (!found) {
+      throw new NotFoundException(`Ticker ${createAssetDto.ticker} not found `);
+    }
+
+    const asset = this.assetRepository.create(createAssetDto);
+    const savedAsset = await this.assetRepository.save(asset);
+    return savedAsset;
   }
 
-  findAll() {
-    return `This action returns all assets`;
+  async findAll() {
+    return await this.assetRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} asset`;
+  async findOne(id: number) {
+    return await this.assetRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updateAssetDto: UpdateAssetDto) {
-    return `This action updates a #${id} asset`;
+  async update(id: number, updateAssetDto: UpdateAssetDto) {
+    const result = await this.assetRepository.update(id, updateAssetDto);
+
+    if (result.affected === 0) {
+      throw new NotFoundException(`Asset with id ${id} not found`);
+    }
+    return `${result.affected} asset updated`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} asset`;
+  async remove(id: number) {
+    const result = await this.assetRepository.delete(id);
+
+    if (result.affected === 0) {
+      throw new NotFoundException(`Asset with id ${id} not found`);
+    }
+    return `${result.affected} asset removed`;
   }
 }
