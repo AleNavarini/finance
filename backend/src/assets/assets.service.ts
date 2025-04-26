@@ -1,9 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAssetDto } from './dto/create-asset.dto';
 import { UpdateAssetDto } from './dto/update-asset.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Asset } from './entities/asset.entity';
 
 @Injectable()
 export class AssetsService {
+  constructor(
+    @InjectRepository(Asset) private assetRepository: Repository<Asset>,
+  ) {}
+
   create(createAssetDto: CreateAssetDto) {
     return 'This action adds a new asset';
   }

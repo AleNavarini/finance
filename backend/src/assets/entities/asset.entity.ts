@@ -1,5 +1,12 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+export enum AssetType {
+  EQUITY = 'equity',
+  BOND = 'bond',
+  CEDEAR = 'cedear',
+  LETTER = 'letter',
+}
+
 @Entity()
 export class Asset {
   @PrimaryGeneratedColumn()
@@ -9,5 +16,5 @@ export class Asset {
   ticker: string;
 
   @Column()
-  type: string;
+  type: AssetType;
 }
