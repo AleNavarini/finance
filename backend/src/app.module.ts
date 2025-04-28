@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { typeOrmConfig } from './typeorm.config';
 import { UsersModule } from './user/users.module';
 import { AssetsModule } from './assets/assets.module';
+import { BondarapiModule } from './bondarapi/bondarapi.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { AssetsModule } from './assets/assets.module';
     TypeOrmModule.forRootAsync(typeOrmConfig),
     UsersModule,
     AssetsModule,
+    BondarapiModule,
   ],
   controllers: [],
   providers: [],
