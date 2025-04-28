@@ -10,7 +10,8 @@ async function bootstrap() {
     .setTitle('Finance API')
     .setDescription('This is the finance api for the portfolio management app')
     .setVersion('1.0')
-    .addTag('user', 'Operations related to users')
+    .addTag('users', 'Operations related to users')
+    .addTag('assets', 'Operations related to assets')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
