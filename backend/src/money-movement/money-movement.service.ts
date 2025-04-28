@@ -23,7 +23,7 @@ export class MoneyMovementService {
   }
 
   async findOne(id: number) {
-    return await this.moneyMovementRepository.findOne(id);
+    return await this.moneyMovementRepository.findOne({ where: { id } });
   }
 
   async update(id: number, updateMoneyMovementDto: UpdateMoneyMovementDto) {
