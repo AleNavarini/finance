@@ -19,3 +19,10 @@ Portfolio
   - total_usd
   - date
   - assets []
+
+MoneyMovements:
+  - id
+  - portfolio_id
+  - amount_ars
+  - amount_usd
+  - date
