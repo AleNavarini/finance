@@ -12,6 +12,14 @@ Asset
   - type (stock, bond)
   - ticker
 
+
+Order:
+  - id
+  - type
+  - asset
+  - price
+
+
 Portfolio
   - id
   - user_id
