@@ -9,5 +9,6 @@ import { BondarapiModule } from 'src/bondarapi/bondarapi.module';
   imports: [TypeOrmModule.forFeature([Asset]), BondarapiModule],
   controllers: [AssetsController],
   providers: [AssetsService],
+  exports: [TypeOrmModule],
 })
 export class AssetsModule {}

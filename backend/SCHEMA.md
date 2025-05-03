@@ -12,6 +12,14 @@ Asset
   - type (stock, bond)
   - ticker
 
+
+Order:
+  - id
+  - type
+  - asset
+  - price
+
+
 Portfolio
   - id
   - user_id
@@ -19,3 +27,10 @@ Portfolio
   - total_usd
   - date
   - assets []
+
+MoneyMovements:
+  - id
+  - portfolio_id
+  - amount_ars
+  - amount_usd
+  - date
