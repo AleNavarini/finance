@@ -12,8 +12,6 @@ export class OrderService {
   constructor(
     @InjectRepository(Asset)
     private readonly assetRepository: Repository<Asset>,
-    @InjectRepository(Portfolio)
-    private readonly portfolioRepository: Repository<Portfolio>,
     @InjectRepository(Order)
     private readonly orderRepository: Repository<Order>,
   ) {}
