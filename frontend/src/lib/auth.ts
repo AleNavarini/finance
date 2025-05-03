@@ -1,8 +1,8 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { JWT } from "next-auth/jwt";
-import { getUser } from "@/app/service/auth.service";
-import { SessionType } from "@/app/types/session";
+import { SessionType } from "@/types/session";
+import { getUser } from "@/services/auth.service";
 
 export const authOptions: NextAuthOptions = {
   providers: [
