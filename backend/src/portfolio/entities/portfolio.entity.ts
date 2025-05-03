@@ -4,8 +4,10 @@ import {
   Column,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
+import { Order } from 'src/order/entities/order.entity';
 
 @Entity()
 export class Portfolio {
@@ -18,4 +20,7 @@ export class Portfolio {
   @OneToOne(() => User)
   @JoinColumn()
   user: User;
+
+  @OneToMany(() => Order, (order) => order.portfolio)
+  orders: Order[];
 }

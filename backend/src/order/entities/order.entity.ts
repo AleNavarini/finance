@@ -1,4 +1,5 @@
 import { Asset } from 'src/assets/entities/asset.entity';
+import { Portfolio } from 'src/portfolio/entities/portfolio.entity';
 import {
   Column,
   PrimaryGeneratedColumn,
@@ -28,6 +29,9 @@ export class Order {
 
   @ManyToOne(() => Asset, (asset) => asset.orders)
   asset: Asset;
+
+  @ManyToOne(() => Portfolio, (portfolio) => portfolio.orders)
+  portfolio: Portfolio;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

@@ -8,5 +8,6 @@ import { Portfolio } from './entities/portfolio.entity';
   imports: [TypeOrmModule.forFeature([Portfolio])],
   controllers: [PortfolioController],
   providers: [PortfolioService],
+  exports: [TypeOrmModule],
 })
 export class PortfolioModule {}

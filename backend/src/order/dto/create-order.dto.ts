@@ -5,4 +5,5 @@ export class CreateOrderDto {
   price: number;
   type: OrderType;
   quantity: number;
+  portfolioId: number;
 }

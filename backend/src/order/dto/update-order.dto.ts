@@ -7,4 +7,5 @@ export class UpdateOrderDto extends PartialType(CreateOrderDto) {
   price?: number;
   type?: OrderType;
   quantity?: number;
+  portfolioId?: number;
 }

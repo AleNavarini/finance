@@ -5,28 +5,25 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Asset } from 'src/assets/entities/asset.entity';
 import { Repository } from 'typeorm';
 import { Order } from './entities/order.entity';
+import { Portfolio } from 'src/portfolio/entities/portfolio.entity';
 
 @Injectable()
 export class OrderService {
   constructor(
     @InjectRepository(Asset)
     private readonly assetRepository: Repository<Asset>,
+    @InjectRepository(Portfolio)
+    private readonly portfolioRepository: Repository<Portfolio>,
     @InjectRepository(Order)
     private readonly orderRepository: Repository<Order>,
   ) {}
   async create(createOrderDto: CreateOrderDto) {
-    const asset = await this.assetRepository.findOne({
-      where: {
-        id: createOrderDto.assetId,
-      },
+    const order = this.orderRepository.create({
+      ...createOrderDto,
+      asset: { id: createOrderDto.assetId },
+      portfolio: { id: createOrderDto.portfolioId },
     });
-
-    if (!asset) {
-      throw new NotFoundException(`Asset not found`);
-    }
-    const data = { ...createOrderDto, asset };
-    const createdOrder = this.orderRepository.create(data);
-    return await this.orderRepository.save(createdOrder);
+    return await this.orderRepository.save(order);
   }
 
   async findAll() {
@@ -49,7 +46,8 @@ export class OrderService {
     return await this.orderRepository.update(id, data);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} order`;
+  async remove(id: number) {
+    const result = await this.orderRepository.delete({ id });
+    return `${result.affected} orders have been deleted`;
   }
 }
