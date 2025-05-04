@@ -16,8 +16,10 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, profile }) {
       const data = await getUser(user.email!);
       if (data.id) {
+        console.log("Found the user, logging in ... ");
         return true;
       }
+      console.log("Did not find any user with that email");
       return false;
     },
     async jwt({ token, account, user }) {
