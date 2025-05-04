@@ -1,7 +1,8 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { SessionType } from "@/types/session";
 import { JWT } from "next-auth/jwt";
+import { SessionType } from "@/types/session";
+import { getUser } from "@/services/auth.service";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -12,7 +13,15 @@ export const authOptions: NextAuthOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    async signIn({ user, profile }) {},
+    async signIn({ user, profile }) {
+      const data = await getUser(user.email!);
+      if (data.id) {
+        console.log("Found the user, logging in ... ");
+        return true;
+      }
+      console.log("Did not find any user with that email");
+      return false;
+    },
     async jwt({ token, account, user }) {
       if (account && user) {
         token.accessToken = account.access_token;
