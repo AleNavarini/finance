@@ -17,11 +17,10 @@ export async function getUser(email: string): Promise<GetUserResponse> {
       },
     },
   );
-
   if (!response.ok) {
     throw new Error(`Failed to fetch user: ${response.statusText}`);
   }
 
-  const data: GetUserResponse = await response.json();
-  return data;
+  const data: GetUserResponse[] = await response.json();
+  return data[0];
 }
